@@ -11,6 +11,11 @@ app.listen (PORT, () =>  {
     console.log (`El servidor está escuchando en el puerto ${PORT}`);
 })
 
+/*Devuelve un index en el root*/
+app.get ("/", (req,res)=> {
+    res.send (`<center><h1><a href="/productos">Todos los productos</a> <p> <a href="/productorandom">Productos al Azar</a></center>`);
+})
+
 
 /*Devuelve el listado de todos los productos y los muestra en html*/
 app.get ("/productos", (req,res)=> {
