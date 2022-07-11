@@ -1,5 +1,10 @@
 /* Importa modulos requeridos */
 let fs = require("fs");
+const Contenedor = require('./contenedor.js')
+
+//Crea la clase desde el archivo
+const listaProductos = new Contenedor ("./files/productos.json");
+
 const express = require ("express");
 const app = express();
 
@@ -19,7 +24,7 @@ app.get ("/", (req,res)=> {
 
 /*Devuelve el listado de todos los productos y los muestra en html*/
 app.get ("/productos", (req,res)=> {
-    let obj = JSON.parse(fs.readFileSync("./files/productos.json", 'utf-8'));
+    let obj = listaProductos.getAll();
     let html = "";
     obj.forEach(producto => {
         html = html + `<h2>${producto.title}</h2><br><h3>$${producto.price}</h3><br><img src="${producto.thumbnail}"><hr>`;
@@ -29,7 +34,7 @@ app.get ("/productos", (req,res)=> {
 
 /*Devuelve un producto al azar y lo muestra en html*/
 app.get ("/productoRandom", (req,res)=> {
-    let obj = JSON.parse(fs.readFileSync("./files/productos.json", 'utf-8'));
+    let obj = listaProductos.getAll();
     let azar = Math.floor(Math.random()*obj.length);
     console.log(azar); 
     let producto = obj[azar];
