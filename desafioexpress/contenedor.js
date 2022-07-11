@@ -56,7 +56,6 @@ let ultimoborrado;
     /*crear un método que elimina todos los objetos presentes en el archivo*/
     deleteAll() {
         let data = this.getAll();
-        idglobalborrados = data[data.length -1].id
         fs.writeFileSync(this.fileName, '[]', 'utf-8');
     }
 
