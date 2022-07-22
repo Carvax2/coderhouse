@@ -34,6 +34,7 @@ router.get("/productos/:id", (req,res) => {
 router.post("/productos", (req,res) => {
     const nuevoProducto = req.body;
     console.log(nuevoProducto);
+    contenedor.save(nuevoProducto);
     res.json(nuevoProducto);
 })
 
@@ -64,6 +65,7 @@ router.delete("/productos/:id", (req,res) => {
 
 app.use("/api",router);
 app.use(express.json());
+app.use(bodyParser.json());
 
 
 app.listen (PORT, () =>  {
