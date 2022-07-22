@@ -37,10 +37,6 @@ router.post("/productos", (req,res) => {
     res.json(nuevoProducto);
 })
 
-router.post("/productos/", (req,res) => {
-    const id = req.id;
-    res.send (`POSTt ok productos`);
-})
 
 router.put("/productos/:id", (req,res) => {
         const id = parseInt(req.params.id);
