@@ -8,7 +8,7 @@ const contenedor = new Contenedor("productos.json");
 const upload = require("./storage");
 const bodyParser = require('body-parser');
 
-router.get("/", (req,res) => {
+app.get("/", (req,res) => {
     res.send ("PÁGINA PRINCIPAL");
 })
 
@@ -65,7 +65,9 @@ router.delete("/productos/:id", (req,res) => {
 
 app.use("/api",router);
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.use(bodyParser.json());
+app.use(express.static("static"));
 
 
 app.listen (PORT, () =>  {
