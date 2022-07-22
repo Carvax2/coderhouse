@@ -67,20 +67,6 @@ class Contenedor {
         ultimoborrado = id;
     }
 
-    updateById(id,obj) {
-        let data = this.getAll();
-        let producto = this.getById(id);
-        if (producto == undefined) {
-            return (`El producto seleccionado no existe`);
-        }
-        else {
-            this.deleteById(id);
-            producto= obj;
-            producto.id = id;
-            data.push(producto);
-
-        }
-    }
     
 }
 

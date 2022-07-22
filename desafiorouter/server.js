@@ -6,6 +6,7 @@ const PORT = 8080;
 const Contenedor = require("./utils/contenedor");
 const contenedor = new Contenedor("productos.json"); 
 const upload = require("./storage");
+const bodyParser = require('body-parser');
 
 router.get("/", (req,res) => {
     res.send ("PÁGINA PRINCIPAL");
@@ -17,7 +18,7 @@ router.get("/productos", (req,res) => {
 })
 
 router.get("/productos/:id", (req,res) => {
-    let id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     console.log(id);
     const productoSeleccionado = contenedor.getById(id);
     console.log(productoSeleccionado);
@@ -37,20 +38,29 @@ router.post("/productos", (req,res) => {
 })
 
 router.post("/productos/", (req,res) => {
-    let id = req.id;
+    const id = req.id;
     res.send (`POSTt ok productos`);
 })
 
 router.put("/productos/:id", (req,res) => {
-    let id = parseInt(req.params.id);
-    let obj = req.body;
-    contenedor.updateById(id);
+        const id = parseInt(req.params.id);
+        const data = contenedor.getAll();
+        let producto = contenedor.getById(id);
+        if (producto == undefined) {
+            res.send (`El producto seleccionado no existe`);
+        }
+        else {
+            contenedor.deleteById(id);
+            producto= req.body;
+            producto.id = id;
+            data.push(producto);
+            res.send (`Producto actualizado`);
 
-
+        }
 })
 
 router.delete("/productos/:id", (req,res) => {
-    let id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     contenedor.deleteById(id);
     res.send (`Producto con el ${id} borrado`);
 })
